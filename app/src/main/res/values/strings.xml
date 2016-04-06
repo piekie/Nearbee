@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">Nearbee</string>
+
+    <string name="action_settings">Settings</string>
+
+    <string name="login_btn_name">Use this identifier</string>
+
+    <string name="nearby_amount">0</string>
+    <string name="chat_empty">Any message nearby, sorry :(</string>
+
+    <string name="hint_identifier">Your identifier</string>
+    <string name="message_hint">Type a message here</string>
+
+</resources>
