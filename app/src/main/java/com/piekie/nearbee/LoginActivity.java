@@ -2,8 +2,8 @@ package com.piekie.nearbee;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -25,21 +25,14 @@ public class LoginActivity extends AppCompatActivity {
 
         identifier = (EditText) findViewById(R.id.login_identifier);
 
-        // Getting sharedPreferences instance of string
-        // where we have saved data about last identifier
-        String lastIdentifier = this.getPreferences(Context.MODE_PRIVATE)
-                .getString(Constants.LAST_IDENTIFIER, Constants.NONE);
-        if (!lastIdentifier.equals(Constants.NONE)) {
-            // Setting text of identifier's EditText to last inputted identifier */
-            identifier.setText(lastIdentifier);
-        }
+        //TODO: Remembering of previous identifier
     }
 
     @Override
     protected void onStart() {
         super.onStart();
 
-        /** Check if this activity was launched before */
+        // Check if this activity was launched before
         if (getPreferences(Context.MODE_PRIVATE).getBoolean(Constants.WAS_LAUNCHED, false)) {
             // True: call onDestroy() and skip this activity
             //  Set "was_launched" flag to false for next launch.
@@ -56,6 +49,18 @@ public class LoginActivity extends AppCompatActivity {
                     .putBoolean(Constants.WAS_LAUNCHED, true)
                     .apply();
         }
+    }
+
+    @Override
+    public void onDestroy() {
+        //set "was" launched flag to false to prevent app's turnings off during launching
+        //// FIXME: 4/8/2016
+        getPreferences(Context.MODE_PRIVATE)
+                .edit()
+                .putBoolean(Constants.WAS_LAUNCHED, false)
+                .apply();
+
+        super.onDestroy();
     }
 
     /** Handling onClickEvent and passing to next activity
