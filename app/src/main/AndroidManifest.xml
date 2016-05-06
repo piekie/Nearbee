@@ -10,9 +10,12 @@
         android:theme="@style/AppTheme">
         <meta-data
             android:name="com.google.android.nearby.messages.API_KEY"
-            android:value="?????????" />
+            android:value="" />
 
-        <activity android:name=".LoginActivity">
+        <activity
+            android:name=".LoginActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -20,7 +23,17 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".ChatActivity"></activity>
+        <activity
+            android:name=".ChatActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:screenOrientation="portrait">
+
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+
+        </activity>
     </application>
 
 </manifest>

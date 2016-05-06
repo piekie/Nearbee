@@ -18,7 +18,6 @@ public class Constants {
     public static final String TASK_NONE = "task_none";
 
     //Additional constants.
-    public static final String WAS_LAUNCHED = "was_launched";
     public static final String LAST_IDENTIFIER = "last_identifier";
     public static final String NONE = "none";
     public static final int ID_MIN_SYMBOLS = 3;

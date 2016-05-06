@@ -2,7 +2,6 @@ package com.piekie.nearbee;
 
 import android.app.Activity;
 import android.app.FragmentManager;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -64,15 +63,5 @@ public class ChatActivity extends AppCompatActivity {
                         Toast.LENGTH_LONG).show();
             }
         }
-    }
-
-    @Override
-    public void onDestroy() {
-        getPreferences(Context.MODE_PRIVATE)
-                .edit()
-                .putBoolean(Constants.WAS_LAUNCHED, false)
-                .apply();
-
-        super.onDestroy();
     }
 }

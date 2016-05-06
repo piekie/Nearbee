@@ -28,41 +28,6 @@ public class LoginActivity extends AppCompatActivity {
         //TODO: Remembering of previous identifier
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-
-        // Check if this activity was launched before
-        if (getPreferences(Context.MODE_PRIVATE).getBoolean(Constants.WAS_LAUNCHED, false)) {
-            // True: call onDestroy() and skip this activity
-            //  Set "was_launched" flag to false for next launch.
-
-            getPreferences(Context.MODE_PRIVATE)
-                    .edit()
-                    .putBoolean(Constants.WAS_LAUNCHED, false)
-                    .apply();
-            onDestroy();
-        } else {
-            // False: continue working. Set "was_launched" flag to true
-            getPreferences(Context.MODE_PRIVATE)
-                    .edit()
-                    .putBoolean(Constants.WAS_LAUNCHED, true)
-                    .apply();
-        }
-    }
-
-    @Override
-    public void onDestroy() {
-        //set "was" launched flag to false to prevent app's turnings off during launching
-        //// FIXME: 4/8/2016
-        getPreferences(Context.MODE_PRIVATE)
-                .edit()
-                .putBoolean(Constants.WAS_LAUNCHED, false)
-                .apply();
-
-        super.onDestroy();
-    }
-
     /** Handling onClickEvent and passing to next activity
      * @param v View for the onClick listener
      */
@@ -83,6 +48,7 @@ public class LoginActivity extends AppCompatActivity {
             Intent intent = new Intent(this, ChatActivity.class);
             intent.putExtra("Profile", ChatMessage.gson.toJson(profile));
             startActivity(intent);
+            finish();
         } else {
             // Message about length of identifier: must be >= ID_MIN_SYMBOLS
             Toast t = Toast.makeText(getApplicationContext(), Constants.TOO_SMALL_ID, Toast.LENGTH_SHORT);
