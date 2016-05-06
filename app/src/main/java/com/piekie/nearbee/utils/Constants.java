@@ -24,4 +24,5 @@ public class Constants {
 
     //Toast
     public static final String TOO_SMALL_ID = "More than 2 symbols please :0";
+    public static final String TO_CLIPBOARD = "Text of the message was copied to clipboard";
 }

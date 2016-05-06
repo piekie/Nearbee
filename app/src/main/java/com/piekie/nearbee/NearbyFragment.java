@@ -1,6 +1,8 @@
 package com.piekie.nearbee;
 
 import android.app.Fragment;
+import android.content.ClipData;
+import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.IntentSender;
 import android.content.SharedPreferences;
@@ -13,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
@@ -104,6 +107,17 @@ public class NearbyFragment extends Fragment implements GoogleApiClient.Connecti
     public NearbyFragment() {
     }
 
+    private static String connectionSuspendedCauseToString(int cause) {
+        switch (cause) {
+            case CAUSE_NETWORK_LOST:
+                return "CAUSE_NETWORK_LOST";
+            case CAUSE_SERVICE_DISCONNECTED:
+                return "CAUSE_SERVICE_DISCONNECTED";
+            default:
+                return "CAUSE_UNKNOWN: " + cause;
+        }
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -183,9 +197,32 @@ public class NearbyFragment extends Fragment implements GoogleApiClient.Connecti
         nearbyAmount = (TextView) wrapper.findViewById(R.id.nearby_amount);
 
         ListView chatView = (ListView) wrapper.findViewById(R.id.chat);
+
         chatAdapter = new ChatAdapter(getActivity().getApplicationContext(), R.id.chat);
         //Setting adapter to listView (chat).
         chatView.setAdapter(chatAdapter);
+
+        //Setting onClickListener to items of list
+        chatView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
+                TextView tv = (TextView) view.findViewById(R.id.chat_item);
+                if (tv != null) {
+                    //Copying to clipboard content of casted view
+                    ClipboardManager clipboard = (ClipboardManager) getActivity().getSystemService(Context.CLIPBOARD_SERVICE);
+                    ClipData clip = ClipData.newPlainText(TAG, tv.getText().toString());
+                    clipboard.setPrimaryClip(clip);
+
+                    //Message about copying text of the message to clipboard
+                    Toast t = Toast.makeText(getActivity().getApplicationContext(), Constants.TO_CLIPBOARD, Toast.LENGTH_SHORT);
+                    t.show();
+
+                    return true;
+                }
+                return false;
+            }
+        });
+
 
         mMessageListener = new MessageListener() {
 
@@ -324,7 +361,6 @@ public class NearbyFragment extends Fragment implements GoogleApiClient.Connecti
         super.onActivityCreated(savedInstanceState);
     }
 
-
     @Override
     public void onConnected(Bundle connectionHint) {
         Log.i(TAG, "GoogleApiClient connected");
@@ -338,17 +374,6 @@ public class NearbyFragment extends Fragment implements GoogleApiClient.Connecti
     public void onConnectionSuspended(int cause) {
         Log.i(TAG, "GoogleApiClient connection suspended: "
                 + connectionSuspendedCauseToString(cause));
-    }
-
-    private static String connectionSuspendedCauseToString(int cause) {
-        switch (cause) {
-            case CAUSE_NETWORK_LOST:
-                return "CAUSE_NETWORK_LOST";
-            case CAUSE_SERVICE_DISCONNECTED:
-                return "CAUSE_SERVICE_DISCONNECTED";
-            default:
-                return "CAUSE_UNKNOWN: " + cause;
-        }
     }
 
     @Override

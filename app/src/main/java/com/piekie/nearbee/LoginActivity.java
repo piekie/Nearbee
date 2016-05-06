@@ -25,7 +25,12 @@ public class LoginActivity extends AppCompatActivity {
 
         identifier = (EditText) findViewById(R.id.login_identifier);
 
-        //TODO: Remembering of previous identifier
+        String lastIdentifier = this.getPreferences(Context.MODE_PRIVATE)
+                .getString(Constants.LAST_IDENTIFIER, Constants.NONE);
+        if (!lastIdentifier.equals(Constants.NONE)) {
+            // Setting text of identifier's EditText to last inputted identifier */
+            identifier.setText(lastIdentifier);
+        }
     }
 
     /** Handling onClickEvent and passing to next activity
