@@ -1,24 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/wrapper"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:padding="0dp">
 
-    <LinearLayout
-        android:id="@+id/wrapper"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <TextView
-            android:id="@+id/chat_item"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:layout_margin="5dip"
-            android:background="@drawable/mine"
-            android:padding="10dip"
-            android:fontFamily="sans-serif-light"
-            android:textColor="@color/textPrimary" />
-    </LinearLayout>
+    <TextView
+        android:id="@+id/chat_item"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="1dip"
+        android:background="@drawable/mine"
+        android:fontFamily="sans-serif-light"
+        android:gravity="center"
+        android:padding="3dip"
+        android:textColor="@color/textPrimary" />
 
 </LinearLayout>

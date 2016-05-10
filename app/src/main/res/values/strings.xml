@@ -8,6 +8,10 @@
     <string name="nearby_amount">0</string>
     <string name="chat_empty">Any message nearby, sorry :(</string>
 
+    <string name="nearby_amount_d">Shows amount of nearby devices</string>
+    <string name="refresh_d">Allows to resubscribe to broadcasting</string>
+    <string name="send_d">Send a message</string>
+
     <string name="hint_identifier">Your identifier</string>
     <string name="message_hint">Type a message here</string>
 

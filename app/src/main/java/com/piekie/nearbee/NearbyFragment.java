@@ -196,7 +196,7 @@ public class NearbyFragment extends Fragment implements GoogleApiClient.Connecti
         emptyChatTV = (TextView) wrapper.findViewById(R.id.chat_empty_title);
         nearbyAmount = (TextView) wrapper.findViewById(R.id.nearby_amount);
 
-        ListView chatView = (ListView) wrapper.findViewById(R.id.chat);
+        final ListView chatView = (ListView) wrapper.findViewById(R.id.chat);
 
         chatAdapter = new ChatAdapter(getActivity().getApplicationContext(), R.id.chat);
         //Setting adapter to listView (chat).

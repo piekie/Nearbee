@@ -1,58 +1,104 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     tools:context=".NearbyFragment">
 
-    <!-- Refresh. -->
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/colorPrimary"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
-        android:padding="8dp">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-        <RelativeLayout
-            android:layout_width="0dp"
+        <!-- Refresh. -->
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1">
+            android:background="@color/colorPrimary"
+            android:baselineAligned="false"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="8dp">
 
-            <ImageButton
-                android:id="@+id/nearby_amount_pic"
-                android:layout_width="@dimen/icon_dimension"
-                android:layout_height="@dimen/icon_dimension"
-                android:layout_centerInParent="true"
-                android:background="@null"
-                android:src="@drawable/ic_account" />
-
-            <TextView
-                android:id="@+id/nearby_amount"
-                android:layout_width="wrap_content"
+            <RelativeLayout
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:textColor="@color/textPrimary"
-                android:layout_alignBottom="@id/nearby_amount_pic"
-                android:layout_alignRight="@id/nearby_amount_pic"
-                android:text="@string/nearby_amount" />
-        </RelativeLayout>
+                android:layout_weight="1">
+
+                <ImageButton
+                    android:id="@+id/nearby_amount_pic"
+                    android:layout_width="@dimen/icon_dimension"
+                    android:layout_height="@dimen/icon_dimension"
+                    android:layout_centerInParent="true"
+                    android:background="@null"
+                    android:contentDescription="@string/nearby_amount_d"
+                    android:src="@drawable/ic_account" />
+
+                <TextView
+                    android:id="@+id/nearby_amount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@id/nearby_amount_pic"
+                    android:layout_alignRight="@id/nearby_amount_pic"
+                    android:text="@string/nearby_amount"
+                    android:textColor="@color/textPrimary" />
+            </RelativeLayout>
 
 
-        <RelativeLayout
-            android:layout_width="0dp"
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <ImageButton
+                    android:id="@+id/refresh_chat"
+                    android:layout_width="@dimen/icon_dimension"
+                    android:layout_height="@dimen/icon_dimension"
+                    android:layout_centerInParent="true"
+                    android:background="@null"
+                    android:contentDescription="@string/refresh_d"
+                    android:src="@drawable/ic_refresh" />
+            </RelativeLayout>
+
+
+        </LinearLayout>
+
+        <ListView
+            android:id="@+id/chat"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="3"
+            android:divider="@color/divider"
+            android:textColor="@color/textPrimary"
+            android:transcriptMode="alwaysScroll" />
+
+        <LinearLayout
+            android:id="@+id/form"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1">
+            android:background="@color/colorPrimary"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="8dp">
+
+            <EditText
+                android:id="@+id/chat_message"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:fontFamily="sans-serif-light"
+                android:hint="@string/message_hint"
+                android:textColor="@color/textPrimary"
+                android:textColorHint="@color/textPrimary" />
 
             <ImageButton
-                android:id="@+id/refresh_chat"
+                android:id="@+id/chat_send"
                 android:layout_width="@dimen/icon_dimension"
                 android:layout_height="@dimen/icon_dimension"
-                android:layout_centerInParent="true"
                 android:background="@null"
-                android:src="@drawable/ic_refresh" />
-        </RelativeLayout>
-
+                android:contentDescription="@string/send_d"
+                android:src="@drawable/ic_send" />
+        </LinearLayout>
 
     </LinearLayout>
 
@@ -60,45 +106,10 @@
         android:id="@+id/chat_empty_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
         android:layout_gravity="center"
-        android:textColor="@color/primaryText"
         android:text="@string/chat_empty"
-        android:textSize="16sp"
-        android:layout_marginTop="8dp" />
+        android:textColor="@color/primaryText"
+        android:textSize="16sp" />
 
-    <ListView
-        android:id="@+id/chat"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="3"
-        android:textColor="@color/textPrimary"
-        android:transcriptMode="alwaysScroll"
-        android:divider="@color/divider"/>
-
-    <LinearLayout
-        android:id="@+id/form"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/colorPrimary"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
-        android:padding="8dp">
-
-        <EditText
-            android:id="@+id/chat_message"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:hint="@string/message_hint"
-            android:fontFamily="sans-serif-light"
-            android:textColor="@color/textPrimary"
-            android:textColorHint="@color/textPrimary" />
-
-        <ImageButton
-            android:id="@+id/chat_send"
-            android:layout_width="@dimen/icon_dimension"
-            android:layout_height="@dimen/icon_dimension"
-            android:background="@null"
-            android:src="@drawable/ic_send" />
-    </LinearLayout>
-</LinearLayout>
+</RelativeLayout>
